@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="RetroCasinoGame:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/RetroCasinoGame_jar</output-path>
+    <root id="archive" name="RetroCasinoGame.jar">
+      <element id="module-output" name="RetroCasinoGame" />
+    </root>
+  </artifact>
+</component>
