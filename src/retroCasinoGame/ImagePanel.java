@@ -2,8 +2,9 @@ package retroCasinoGame;
 
 import java.awt.Graphics;
 import javax.swing.JPanel;
+import javax.swing.ImageIcon;
 
-import list.ImageList;
+import mz.ImageLoader;
 
 /**
  * {@code list.ImageList} displays images in a panel. repeats each image 3x.
@@ -38,6 +39,16 @@ extends JPanel{
     private int heightImage = (int)(height/6);
 
     /**
+     * Location to browse the image's folder.
+     */
+    private String folderPath = "./image";
+
+    /**
+     * Upload ImageIcon array with images in the image folder.
+     */
+    private ImageIcon[] imageIcon = ImageLoader.loadImages(folderPath);
+
+    /**
      * Arguments specified in its constructor are passed to the JPanel class.
      * default setting:
      * <ul>
@@ -68,7 +79,7 @@ extends JPanel{
     /**
      * Images imported from the {@code list.ImageList} class are drawn in the panel.
      * @param g the <code>Graphics</code> object to protect
-     * @see list.ImageList
+     * @see mz.ImageLoader
      */
     @Override
     public void paintComponent(Graphics g){
@@ -82,9 +93,9 @@ extends JPanel{
      * drawing images on the panel. Each image repeated 3x.
      */
     private void imagesDraw(){
-        for(int i = 0; i< ImageList.IMAGES.length; i++){
+        for(int i = 0; i< imageIcon.length; i++){
             for(int j=0; j<3; j++){
-                graphics.drawImage(ImageList.IMAGES[i], (this.widthImage*j), (this.heightImage*(5-i)), this.widthImage, this.heightImage, getFocusCycleRootAncestor());
+                graphics.drawImage(imageIcon[i].getImage(), (this.widthImage*j), (this.heightImage*(5-i)), this.widthImage, this.heightImage, getFocusCycleRootAncestor());
             }
         }
     }

@@ -1,6 +1,5 @@
 # RetroCasinoGame
----
----
+
 ## Description
 Retro slot machine wins for 3 identical icons.
 
@@ -20,8 +19,8 @@ Retro slot machine wins for 3 identical icons.
   - Creating an array of the specified class. The contents of the array are filled with the type of the specified class.
 - ColorList
   - The color list contains the foreground and background colors of the specified components, the program does not modify the colors. Contains arrays based on which I can request the colors of the components.
-- ImageList
-  - Class for storing images. Load images from the `./image` folder. The images are of `png` type.
+- [ImageLoader](https://github.com/MagyarZoli/ImageLoader)
+  - Class fills the `ImageIcon` array with the image content of the selected folder, which is of `jpg`, `jpeg`, `png` type.
 
 ## Example
 There are many other possible outcomes during program execution.
@@ -87,7 +86,7 @@ when the spin is over, it is uploaded to the array for inspection.
                 for(int j=3; j>0; j--){
                     randomImage[j+(i*4)] = randomImage[(j-1)+(i*4)];
                 }
-                randomImage[(i*4)] = random.nextInt(ImageList.IMAGES.length);
+                randomImage[(i*4)] = random.nextInt(imageIcon.length);
                 winquestion =true;
             }
             else{

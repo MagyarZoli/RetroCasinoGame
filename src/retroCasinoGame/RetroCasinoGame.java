@@ -8,11 +8,12 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import javax.swing.Timer;
 import javax.swing.JLabel;
+import javax.swing.ImageIcon;
 import javax.swing.plaf.basic.BasicButtonUI;
 
 import list.ColorList;
-import list.ImageList;
 import mz.ComponentsArray;
+import mz.ImageLoader;
 import mz.ResponsiveFrame;
 
 /**
@@ -23,7 +24,7 @@ import mz.ResponsiveFrame;
  * other images, other colors can be specified,
  * plus the starting value, rotation speed, the size of the bet's prize.
  * @see list.ColorList
- * @see list.ImageList
+ * @see mz.ImageLoader
  * @see mz.ComponentsArray
  * @see mz.ResponsiveFrame
  * @see retroCasinoGame.GamePanel
@@ -260,6 +261,16 @@ implements ActionListener{
     private boolean foundWinner = false;
 
     /**
+     * Location to browse the image's folder.
+     */
+    private String folderPath = "./image";
+
+    /**
+     * Upload ImageIcon array with images in the image folder.
+     */
+    private ImageIcon[] imageIcon = ImageLoader.loadImages(folderPath);
+
+    /**
      * Arguments passed in the RetroCasinoGame constructor are forwarded to the {@code ResponsiveFrame} class.
      * additional default settings:
      * <ul>
@@ -279,7 +290,7 @@ implements ActionListener{
         super();
         this.setDefaultCloseOperation(RetroCasinoGame.EXIT_ON_CLOSE);
         this.setTitle("Retro Casino Game");
-        this.setIconImage(ImageList.IMAGES[0]);
+        this.setIconImage(imageIcon[0].getImage());
         this.getContentPane().setBackground(ColorList.FRAME_BACKGROUND);
         this.setSize(width,height);
         areaArray();
@@ -295,7 +306,7 @@ implements ActionListener{
      * @see retroCasinoGame.Label
      * @see retroCasinoGame.Button
      * @see list.ColorList
-     * @see list.ImageList
+     * @see mz.ImageLoader
      */
     private void gameFrame(){
         game();
@@ -834,11 +845,11 @@ implements ActionListener{
      * Making a GitHub button in the lower left corner, adding the GitHub image,
      * addActionListener, and then adding it to the frame.
      * @see RetroCasinoGame#actionPerformed(ActionEvent)
-     * @see list.ImageList#GITHUB
+     * @see mz.ImageLoader
      */
     private void github(){
         JLabel label = new JLabel(githubSince);
-        label.setIcon(ImageList.GITHUB);
+        label.setIcon(new ImageIcon("./GitHub/github.png"));
         label.setForeground(ColorList.GITHUB_FOREGROUND);
         label.setBounds(widthArray[0],heightArray[14],(widthArray[2]-widthArray[0]),(heightArray[1]-heightArray[0]));
         github.setBounds(widthArray[0],heightArray[14],(widthArray[2]-widthArray[0]),(heightArray[1]-heightArray[0]));

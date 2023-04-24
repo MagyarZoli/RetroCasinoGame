@@ -7,9 +7,10 @@ import java.awt.event.ActionListener;
 import java.util.Random;
 import javax.swing.JPanel;
 import javax.swing.Timer;
+import javax.swing.ImageIcon;
 
 import list.ColorList;
-import list.ImageList;
+import mz.ImageLoader;
 
 /**
  * In the GamePanel class, drawing random pictures on a 3-column is redrawn as a result of external events.
@@ -73,7 +74,7 @@ implements ActionListener{
      * Uploading is done by the {@code randomImage()} method.
      * Images are provided by the {@code list.ImageList} import class.
      * @see GamePanel#randomImage()
-     * @see list.ImageList
+     * @see mz.ImageLoader
      */
     private int[] randomImage = randomImage();
 
@@ -93,6 +94,16 @@ implements ActionListener{
      * @see GamePanel#winQuestion()
      */
     private boolean winquestion = false;
+
+    /**
+     * Location to browse the image's folder.
+     */
+    private String folderPath = "./image";
+
+    /**
+     * Upload ImageIcon array with images in the image folder.
+     */
+    private ImageIcon[] imageIcon = ImageLoader.loadImages(folderPath);
 
     /**
      * Arguments specified in the GamePanel constructor are passed to JPanel,
@@ -228,12 +239,12 @@ implements ActionListener{
     /**
      * Uploads random images to the array, reads the images from the {@code list.ImageList} class.
      * @return array filled with random images.
-     * @see list.ImageList
+     * @see mz.ImageLoader
      */
     private int[] randomImage(){
         int[] newRandomImage = new int[12];
         for(int i=0; i<newRandomImage.length; i++){
-            newRandomImage[i] = random.nextInt(ImageList.IMAGES.length);
+            newRandomImage[i] = random.nextInt(6);
         }
         return newRandomImage;
     }
@@ -266,7 +277,7 @@ implements ActionListener{
                 for(int j=3; j>0; j--){
                     randomImage[j+(i*4)] = randomImage[(j-1)+(i*4)];
                 }
-                randomImage[(i*4)] = random.nextInt(ImageList.IMAGES.length);
+                randomImage[(i*4)] = random.nextInt(imageIcon.length);
                 winquestion =true;
             }
             else{
@@ -314,7 +325,7 @@ implements ActionListener{
      * @param y upper left y point in the coordinate system
      */
     private void imageDraw(int index, int x, int y){
-        graphics.drawImage(ImageList.IMAGES[index], x, y, this.paintWidth, this.paintHeight, getFocusCycleRootAncestor());
+        graphics.drawImage(imageIcon[index].getImage(), x, y, this.paintWidth, this.paintHeight, getFocusCycleRootAncestor());
     }
 
     /**
